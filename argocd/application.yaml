@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_USERNAME/go-chi-pgx-api
+    repoURL: https://github.com/YulTartar/library-api
     targetRevision: main
     path: k8s
   destination:
