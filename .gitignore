@@ -1,0 +1,20 @@
+﻿# secrets
+.env
+
+# nested duplicate copy of the project
+/library-api/
+
+# IDE
+.idea/
+
+# go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/tmp/
+
+# os
+.DS_Store
+Thumbs.db

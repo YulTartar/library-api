@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-api
+  namespace: library
+  labels:
+    app: library-api
+spec:
+  selector:
+    app: library-api
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+  type: ClusterIP

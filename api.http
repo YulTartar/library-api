@@ -1,0 +1,76 @@
+@baseUrl = http://localhost:8085
+
+### Health check
+GET {{baseUrl}}/health
+Accept: application/json
+
+### List items (empty or with seed)
+GET {{baseUrl}}/api/v1/items
+Accept: application/json
+
+### Create item (valid)
+# @name createItem
+POST {{baseUrl}}/api/v1/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Go Microservices",
+  "description": "Learn clean architecture, pgxpool, migrations and graceful shutdown",
+  "price": 49.99
+}
+
+### Get created item by ID
+GET {{baseUrl}}/api/v1/items/{{createItem.response.body.$.id}}
+Accept: application/json
+
+### List items with search filter
+GET {{baseUrl}}/api/v1/items?search=Go&limit=10
+Accept: application/json
+
+### Update created item (partial update - e.g. price change)
+PUT {{baseUrl}}/api/v1/items/{{createItem.response.body.$.id}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "price": 39.99
+}
+
+### Validation error: title is required
+POST {{baseUrl}}/api/v1/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "Invalid item without title",
+  "price": 10.00
+}
+
+### Validation error: price must be non-negative
+POST {{baseUrl}}/api/v1/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Invalid price book",
+  "price": -5.50
+}
+
+### Duplicate title error (409 Conflict)
+POST {{baseUrl}}/api/v1/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Go Microservices",
+  "price": 49.99
+}
+
+### Delete created item
+DELETE {{baseUrl}}/api/v1/items/{{createItem.response.body.$.id}}
+Accept: application/json
+
+### Get deleted item (should return 404 Not Found)
+GET {{baseUrl}}/api/v1/items/{{createItem.response.body.$.id}}
+Accept: application/json
