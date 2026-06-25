@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: library-api
-          image: ghcr.io/OWNER_PLACEHOLDER/library-api:latest
+          image: ghcr.io/yultartar/library-api:1.0.0
           ports:
             - containerPort: 8080
               name: http
